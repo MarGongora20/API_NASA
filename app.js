@@ -4,17 +4,20 @@ const apodContent = document.getElementById("apod-content");
 const btnSearch = document.getElementById("btn-search");
 
 btnSearch.addEventListener("click", async () => {
-    alert('sdsd')
     const date = document.getElementById("apod-date").value;
+    const today = new Date().toISOString().split("T")[0];
+
+    if (date > today) {
+        alert("La fecha no puede ser mayor a hoy.");
+        return;
+    }
+
     const data = await getImageByDate(date);
     renderApodByDate(data);
 });
 
-// const data = await getImageOfTheDay();
-// console.log(data);
-
-
-// renderApod(data);
+const data = await getImageOfTheDay();
+renderApod(data);
 
 function renderApod(data) {
 
@@ -25,12 +28,12 @@ function renderApod(data) {
                 alt="${data.title}"
                 class="responsive-img"
               >`
-            : `<iframe
+            : `<video
                 src="${data.url}"
-                frameborder="0"
-                allowfullscreen
+                controls
+                style="max-width: 100%; max-height: 500px;"
                 class="responsive-video"
-              ></iframe>`;
+              ></video>`;
 
     apodContent.innerHTML = `
         <h2>${data.title}</h2>

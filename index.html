@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NASA APOD Explorer</title>
-    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="styles.css"> -->
 </head>
 <body>
 
@@ -20,6 +21,8 @@
                 <label for="apod-date">Buscar por fecha:</label>
                 <input type="date" id="apod-date" name="apod-date">
                 <button id="btn-search" class="btn-primary">Buscar</button>
+                <br>
+                <span id="error"></span>
             </div>
             
             <div class="quick-actions">
@@ -70,6 +73,7 @@
         <p>Datos proporcionados por la <a href="https://api.nasa.gov/" target="_blank">API pública de la NASA</a></p>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="script.js" type="module"></script>
+    <script src="app.js" type="module"></script>
 </body>
 </html>

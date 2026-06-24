@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NASA APOD Explorer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <h1>NASA Astronomy Picture of the Day</h1>
+        <p>Explora el cosmos, una imagen a la vez</p>
+    </header>
+
+    <main class="container">
+        
+        <section class="controls-section">
+            <div class="search-box">
+                <label for="apod-date">Buscar por fecha:</label>
+                <input type="date" id="apod-date" name="apod-date">
+                <button id="btn-search" class="btn-primary">Buscar</button>
+            </div>
+            
+            <div class="quick-actions">
+                <button id="btn-today" class="btn-secondary">Ver Hoy</button>
+            </div>
+        </section>
+
+        <hr>
+
+        <section id="apod-container" class="apod-card">
+            <div id="loader" class="hidden">Cargando los secretos del universo...</div>
+            
+            <div id="error-message" class="error-box hidden"></div>
+
+            <div id="apod-content">
+                <h2 id="apod-title">Título de la Imagen</h2>
+                <p id="apod-date-display" class="date-text">Fecha: AAAA-MM-DD</p>
+                
+                <div id="apod-media">
+                    <img id="apod-img" src="" alt="NASA APOD" class="responsive-img">
+                    <iframe id="apod-video" src="" frameborder="0" allowfullscreen class="responsive-video hidden"></iframe>
+                </div>
+
+                <div class="actions">
+                    <button id="btn-favorite" class="btn-fav">⭐ Guardar en Favoritos</button>
+                </div>
+
+                <div class="apod-description">
+                    <h3>Explicación Científica</h3>
+                    <p id="apod-explanation">Aquí se mostrará la explicación detallada proporcionada por la NASA...</p>
+                </div>
+            </div>
+        </section>
+
+        <hr>
+
+        <section class="favorites-section">
+            <h2>⭐ Mis Astronomy Picture Favoritas</h2>
+            <p class="subtitle">Haz clic en cualquiera para volver a cargarla</p>
+            
+            <ul id="favorites-list" class="fav-list">
+                </ul>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Datos proporcionados por la <a href="https://api.nasa.gov/" target="_blank">API pública de la NASA</a></p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

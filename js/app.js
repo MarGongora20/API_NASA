@@ -1,26 +1,39 @@
-import { getImageByDate, getImageOfTheDay } from "./js/service.js";
+import { getImageByDate, getImageOfTheDay } from "./env/service.js";
+import { setApodActual, cargarFavoritos } from "./env/script.js";
 
 const apodContent = document.getElementById("apod-content");
 const btnSearch = document.getElementById("btn-search");
 
-btnSearch.addEventListener("click", async () => {
-    const date = document.getElementById("apod-date").value;
-    const today = new Date().toISOString().split("T")[0];
+if (btnSearch) {
+    btnSearch.addEventListener("click", async () => {
+        const date = document.getElementById("apod-date").value;
+        const today = new Date().toISOString().split("T")[0];
 
-    if (date > today) {
-        alert("La fecha no puede ser mayor a hoy.");
-        return;
+        if (date > today) {
+            alert("La fecha no puede ser mayor a hoy.");
+            return;
+        }
+
+        const data = await getImageByDate(date);
+        setApodActual(data); 
+        renderApodByDate(data);
+    });
+}
+
+async function iniciarApp() {
+    try {
+        const data = await getImageOfTheDay();
+        setApodActual(data);
+        renderApod(data);
+        cargarFavoritos();
+    } catch (error) {
+        console.error("Error al iniciar la app:", error);
     }
+}
 
-    const data = await getImageByDate(date);
-    renderApodByDate(data);
-});
-
-const data = await getImageOfTheDay();
-renderApod(data);
+iniciarApp();
 
 function renderApod(data) {
-
     const media =
         data.media_type === "image"
             ? `<img
@@ -60,7 +73,6 @@ function renderApod(data) {
 }
 
 function renderApodByDate(data) {
-
     apodContent.innerHTML = `
         <div class="card border-primary shadow">
 
@@ -78,7 +90,7 @@ function renderApodByDate(data) {
 
                 <h2 class="text-center mb-4">
                     ${data.title}
-                </h2>
+                </h2> 
 
                 <img
                     src="${data.url}"
